@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Acerca | Proyecto Notas{% endblock %}
+{% block nav_acerca_active %}active{% endblock %}
+
+{% block hero %}
+<section class="mb-4">
+  <div class="hero-card">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <span class="badge bg-light text-dark mb-2">
+          <i class="bi bi-person-workspace me-1"></i>
+          Acerca del proyecto
+        </span>
+        <h1 class="h2 fw-bold mb-2">Proyecto Notas – Aplicación Web en Django</h1>
+        <p class="hero-subtitle mb-0">
+          Una app sencilla para organizar ideas, tareas y recordatorios, pensada como
+          práctica de desarrollo web con Django.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock hero %}
+
+{% block content %}
+<div class="card content-card p-4 mb-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <span class="badge-section mb-2">
+        <i class="bi bi-info-circle me-1"></i> Información general
+      </span>
+      <h2 class="h5 mb-1">Sobre la aplicación</h2>
+      <p class="text-muted mb-0">
+        Proyecto Notas es una aplicación web construida con el framework Django
+        que permite crear, editar y organizar notas de manera rápida y centralizada.
+      </p>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row gy-4">
+    <div class="col-md-6">
+      <h3 class="h6 text-uppercase text-muted mb-3">Datos del proyecto</h3>
+      <ul class="list-unstyled small mb-0">
+        <li class="mb-2">
+          <i class="bi bi-person-fill me-2"></i>
+          <strong>Autor:</strong> Ignacio Guzmán
+        </li>
+        <li class="mb-2">
+          <i class="bi bi-mortarboard-fill me-2"></i>
+          <strong>Carrera:</strong> Técnico en Programación – UTN
+        </li>
+        <li class="mb-2">
+          <i class="bi bi-pc-display-horizontal me-2"></i>
+          <strong>Actualmente en:</strong> FASE – Soporte Técnico y Sistemas
+        </li>
+        <li class="mb-2">
+          <i class="bi bi-calendar-event me-2"></i>
+          <strong>Tipo de proyecto:</strong> Práctica de desarrollo con Django
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-6">
+      <h3 class="h6 text-uppercase text-muted mb-3">Tecnologías utilizadas</h3>
+      <ul class="list-group list-group-flush small">
+        <li class="list-group-item px-0">
+          <i class="bi bi-file-code me-2"></i>
+          <strong>Django:</strong> framework principal para la lógica del lado del servidor.
+        </li>
+        <li class="list-group-item px-0">
+          <i class="bi bi-window-sidebar me-2"></i>
+          <strong>Templates HTML:</strong> sistema de plantillas de Django para las vistas.
+        </li>
+        <li class="list-group-item px-0">
+          <i class="bi bi-bootstrap-fill me-2"></i>
+          <strong>Bootstrap 5:</strong> maquetado responsivo y componentes visuales.
+        </li>
+        <li class="list-group-item px-0">
+          <i class="bi bi-database-fill me-2"></i>
+          <strong>Base de datos:</strong> SQLite (modo desarrollo).
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="my-4">
+
+  <div class="row gy-4">
+    <div class="col-md-6">
+      <h3 class="h6 text-uppercase text-muted mb-3">Objetivos de aprendizaje</h3>
+      <ul class="small mb-0">
+        <li>Practicar la estructura de proyectos y aplicaciones en Django.</li>
+        <li>Trabajar con vistas, URLs y templates reutilizables.</li>
+        <li>Diseñar una interfaz limpia usando Bootstrap.</li>
+        <li>Implementar operaciones básicas de CRUD sobre notas.</li>
+      </ul>
+    </div>
+
+    <div class="col-md-6">
+      <h3 class="h6 text-uppercase text-muted mb-3">Próximas mejoras</h3>
+      <ul class="small mb-0">
+        <li>Agregar búsqueda y filtros de notas.</li>
+        <li>Incorporar categorías o etiquetas.</li>
+        <li>Guardar la fecha de creación y última modificación.</li>
+        <li>Agregar autenticación de usuarios para notas personales.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

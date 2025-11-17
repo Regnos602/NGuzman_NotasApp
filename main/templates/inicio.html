@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Bienvenido | Bloc de Notas{% endblock %}
+{% block nav_inicio_active %}active_page{% endblock %}
+
+{% block hero %}
+<section class="mb-4">
+  <div class="hero-card">
+    <div class="row gy-3 align-items-center">
+      <div class="col-lg-7">
+        <span class="badge bg-light text-dark mb-2">
+          <i class="bi bi-journal-text me-1"></i>
+          Bloc de notas personal
+        </span>
+        <h1 class="h2 fw-bold mb-2">Tus ideas, tareas y recordatorios en un solo lugar</h1>
+        <p class="hero-subtitle mb-0">
+          Registrate o iniciá sesión para acceder a tu espacio de notas.
+        </p>
+      </div>
+      <div class="col-lg-5 text-lg-end">
+        <p class="small mb-2 text-muted">¿Todavía no tenés cuenta?</p>
+        <a href="{% url 'registro' %}" class="btn btn-primary btn-sm">
+          <i class="bi bi-person-plus me-1"></i> Crear cuenta nueva
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock hero %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card content-card p-4">
+      <h2 class="h5 mb-3">
+        <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar sesión
+      </h2>
+            <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="mb-3 d-flex align-items-center">
+          <label class="form-label me-2" style="width:100px;">Usuario</label>
+          {{ form.username }}
+        </div>
+
+        <div class="mb-3 d-flex align-items-center">
+          <label class="form-label me-2" style="width:100px;">Contraseña</label>
+          {{ form.password }}
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 mt-2">
+          Entrar al bloc de notas
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

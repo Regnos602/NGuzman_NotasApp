@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Proyecto Notas{% endblock %}</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<style>
+    .logout-btn {
+    background: #F7C843 !important;
+    border: 1px solid #BCA27B;
+    border-radius: 8px;
+    font-weight: 700;
+    padding: 6px 14px;
+    color: #4E342E !important;
+    }
+
+    .logout-btn:hover {
+    background: #ffcf3c !important;
+    }
+
+    input {
+      border: 1px solid #BCA27B;
+      border-radius: 6px;
+      padding: 6px 10px;
+      background: #FFFDE7;
+      width: 100%;
+    }
+
+    body {
+        background: #FFF9C4; 
+        min-height: 100vh;
+        font-family: "Segoe UI", Roboto, sans-serif;
+        color: #4E342E;
+    }
+
+    .navbar-notas {
+        background: #FBC02D;
+        border-bottom: 3px solid #BCA27B;
+    }
+
+    .brand-title {
+        font-weight: 800;
+        font-size: 1.45rem;
+        color: #4E342E !important;
+    }
+
+    .navbar-notas .nav-link {
+        color: #4E342E !important;
+        font-weight: 700; /* <-- negrita */
+        border: 1px solid #BCA27B;
+        border-radius: 8px;
+        padding: 6px 14px;
+        margin-left: 8px;
+        background: #F7C843;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+        transition: 0.15s ease-in-out;
+    }
+
+    .navbar-notas .nav-link.active-page {
+        background: #F8D24A !important;
+        border-color: #A88F63 !important;
+        transform: translateY(-1px);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+    }
+
+    .navbar-notas .nav-link:hover {
+        background: #F8D24A;
+        transform: translateY(-1px);
+    }
+
+    .hero-card {
+        border-radius: 1rem;
+        background: #FFFDE7;
+        border: 2px solid #BCA27B;
+        padding: 2.3rem;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        position: relative;
+        color: #4E342E;
+    }
+
+    .hero-card::after {
+        content: "";
+        position: absolute;
+        top: -30px;
+        right: 25%;
+        width: 90px;
+        height: 30px;
+        background: rgba(255,255,255,0.75);
+        border-radius: 4px;
+        transform: rotate(-3deg);
+        border: 1px solid #E7D7A7;
+    }
+
+    .content-card {
+        background: #FFFDE7;
+        border: 2px solid #BCA27B;
+        border-radius: 1rem;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        color: #4E342E;
+    }
+
+    .badge-section, .badge {
+        background: #F7C843 !important;
+        color: #4E342E !important;
+        border: 1px solid #BCA27B;
+    }
+
+    footer {
+        background: #FFE082;
+        border-top: 2px solid #BCA27B;
+        color: #4E342E;
+    }
+
+    a, a:hover {
+        color: #795548;
+    }
+
+    .btn-primary, .btn-light {
+        background: #F7C843 !important;
+        border: 1px solid #BCA27B;
+        color: #4E342E !important;
+        font-weight: 600;
+    }
+
+    .list-group-item {
+    background-color: transparent !important;
+    }
+
+    .list-group-item {
+    background-color: transparent !important;
+    border: none !important;
+    } 
+
+    .nav-link.btn {
+    background: #F7C843 !important;
+    border: 1px solid #BCA27B;
+    border-radius: 8px;
+    font-weight: 700;
+    padding: 6px 14px;
+    color: #4E342E !important;
+    }
+
+    .nav-link.btn:hover {
+    background: #ffcf3c !important;
+    }
+
+    .navbar-notas button.nav-link {
+    line-height: 20px;      
+    vertical-align: middle;     
+    padding-top: 6px !important; 
+    padding-bottom: 6px !important;
+    }
+
+</style>
+
+  {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-notas mb-4">
+    <div class="container">
+      <a class="navbar-brand brand-title" href="{% url 'inicio' %}">
+        <i class="bi bi-journal-text me-1"></i> Mis Notas
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto">
+
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link {% block nav_notas_active %}{% endblock %}" href="{% url 'lista_notas' %}">
+                <i class="bi bi-pencil-square me-1"></i>Notas
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link {% block nav_acerca_active %}{% endblock %}" href="{% url 'acerca' %}">
+                <i class="bi bi-info-circle me-1"></i>Acerca
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <form action="{% url 'logout' %}" method="post" class="d-inline nav-item ms-2">
+                  {% csrf_token %}
+                      <button type="submit" class="nav-link d-inline-block">       
+                      <i class="bi bi-box-arrow-right me-1"></i>Salir
+                  </button>
+              </form>
+            </li>
+
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link {% block nav_inicio_active %}{% endblock %}" href="{% url 'inicio' %}">
+                <i class="bi bi-box-arrow-in-right me-1"></i>Entrar
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'registro' %}">
+                <i class="bi bi-person-plus me-1"></i>Registrarme
+              </a>
+            </li>
+          {% endif %}
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  {% if messages %}
+  <div class="container mt-2">
+    {% for m in messages %}
+      <div class="alert alert-{{ m.tags }} mb-2">{{ m }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <main class="container pb-5">
+
+    {% block hero %}
+    <section class="mb-4">
+      <div class="hero-card">
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <span class="badge bg-light text-dark mb-2">
+              <i class="bi bi-lightning-charge-fill me-1"></i>
+              Organiza tus ideas
+            </span>
+            <h1 class="h2 fw-bold mb-2">Tu espacio central para todas tus notas</h1>
+            <p class="hero-subtitle mb-3">
+              Guarda tareas, recordatorios y apuntes en un solo lugar. Simple, rápido y pensado para uso diario.
+            </p>
+            <a href="{% url 'lista_notas' %}" class="btn btn-light btn-sm fw-semibold">
+              <i class="bi bi-plus-circle me-1"></i> Crear nueva nota
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endblock hero %}
+
+    <section>
+      {% block content %}{% endblock %}
+    </section>
+
+  </main>
+
+  <footer class="border-top small text-muted py-3 mt-auto">
+    <div class="container d-flex justify-content-between flex-wrap gap-2">
+      <span>&copy; {{ year|default:2025 }} Proyecto Notas</span>
+      <span class="text-secondary">
+        <i class="bi bi-code-slash me-1"></i>
+        Desarrollado con Django & Bootstrap
+      </span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+
+</html>
