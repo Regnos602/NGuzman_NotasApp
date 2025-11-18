@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Eliminar nota | Proyecto Notas{% endblock %}
+{% block nav_notas_active %}active{% endblock %}
+
+{% block hero %}
+<section class="mb-4">
+  <div class="hero-card">
+    <h1 class="h4 fw-bold mb-1">Eliminar nota</h1>
+    <p class="mb-0">
+      ¿Estás seguro de que querés eliminar esta nota? Esta acción no se puede deshacer.
+    </p>
+  </div>
+</section>
+{% endblock hero %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-7">
+    <div class="card content-card p-4">
+      <h2 class="h5 mb-3">{{ nota.titulo }}</h2>
+      <p>{{ nota.contenido|linebreaksbr }}</p>
+
+      <form method="post" class="mt-3">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">
+          <i class="bi bi-trash me-1"></i>Eliminar definitivamente
+        </button>
+        <a href="{% url 'lista_notas' %}" class="btn btn-link">Cancelar</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Mis notas | Proyecto Notas{% endblock %}
+{% block nav_notas_active %}active{% endblock %}
+
+{% block hero %}
+<section class="mb-4">
+  <div class="hero-card">
+    <span class="badge badge-section mb-2">
+      <i class="bi bi-lightning-charge-fill me-1"></i>
+      Organiza tus ideas
+    </span>
+    <h1 class="h2 fw-bold mb-2">Tu espacio central para todas tus notas</h1>
+    <p class="mb-3">
+      Guarda tareas, recordatorios y apuntes en un solo lugar. Simple, rápido y pensado para uso diario.
+    </p>
+    <a href="{% url 'crear_nota' %}" class="btn btn-light btn-sm fw-semibold">
+      <i class="bi bi-plus-circle me-1"></i> Crear nueva nota
+    </a>
+  </div>
+</section>
+{% endblock hero %}
+
+{% block content %}
+<div class="card content-card p-3">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h5 mb-0">
+      <i class="bi bi-journal-text me-1"></i> Lista de notas
+    </h2>
+    <a href="{% url 'crear_nota' %}" class="btn btn-primary btn-sm">
+      <i class="bi bi-plus-circle me-1"></i> Nueva nota
+    </a>
+  </div>
+
+  {% if notas %}
+    <div class="row g-3">
+      {% for nota in notas %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100" style="background:#FFFDE7; border-color:#E0CF9F;">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ nota.titulo }}</h5>
+              <p class="card-text small text-muted mb-2">
+                Actualizada: {{ nota.actualizada_el|date:"d/m/Y H:i" }}
+              </p>
+              <p class="card-text flex-grow-1">
+                {{ nota.contenido|linebreaksbr|truncatechars:150 }}
+              </p>
+              <div class="mt-2 d-flex justify-content-between">
+                <a href="{% url 'editar_nota' nota.id %}" class="btn btn-sm btn-primary">
+                  <i class="bi bi-pencil me-1"></i>Editar
+                </a>
+                <a href="{% url 'eliminar_nota' nota.id %}" class="btn btn-sm btn-outline-danger">
+                  <i class="bi bi-trash me-1"></i>Eliminar
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="mb-0">Todavía no tenés notas creadas. ¡Empezá con una nueva!</p>
+  {% endif %}
+</div>
+{% endblock %}

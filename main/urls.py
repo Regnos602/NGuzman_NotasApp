@@ -16,6 +16,9 @@ urlpatterns = [
 
     #Bloc de notas
     path("notas/", views.lista_notas, name="lista_notas"),
+    path("notas/nueva/", views.crear_nota, name="crear_nota"),
+    path("notas/<int:nota_id>/editar/", views.editar_nota, name="editar_nota"),
+    path("notas/<int:nota_id>/eliminar/", views.eliminar_nota, name="eliminar_nota"),
 
     #Acerca
     path("acerca/", views.acerca, name="acerca"),
